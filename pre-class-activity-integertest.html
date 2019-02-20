@@ -1,0 +1,50 @@
+<!-- Write a function that takes in an input and returns true if it’s an integer and false otherwise.
+
+Ex:
+Input: "7"
+Output: false
+
+Input: 7
+Output: true
+
+Input: 4.3
+Output: false -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="output"></div>
+    <div>Open the Console to See the Magic!</div>
+    <script>
+      const inputs = ["7", 7, 4.2];
+
+      function checkInteger(inputs) {
+        for (var i = 0; i < inputs.length; i++) {
+          if (Number.isInteger(inputs[i]) === true) {
+            console.log(inputs[i]);
+            console.log(true);
+            var answer = "\n" + inputs[i] + " Is Integer? " + true; //works
+            console.log(answer); //works
+            var elephant = document.getElementById("output");
+            console.log(elephant);
+            elephant.append(answer); // works
+          } else {
+            console.log(inputs[i]);
+            console.log(false);
+            var answer = "\n" + inputs[i] + " Is Integer? " + false; //works
+            console.log(answer); //works
+            var elephant = document.getElementById("output");
+            console.log(elephant);
+            elephant.append(answer); //works
+          }
+        }
+      }
+      checkInteger(inputs);
+    </script>
+  </body>
+</html>
