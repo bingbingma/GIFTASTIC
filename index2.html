@@ -20,21 +20,21 @@
       <!-- Rendered Buttons will get Dumped Here  -->
       <div id="buttons-view"></div>
 
-      <form id="tag-form">
-        <label for="tag-input">Add a tag, Yo!</label>
-        <input type="text" id="tag-input" /><br />
+      <form id="movie-form">
+        <label for="movie-input">Add a tag, Yo!</label>
+        <input type="text" id="movie-input" /><br />
 
-        <!-- Button triggers new tag to be added -->
-        <input id="add-tag" type="submit" value="Add a tag, Yo!" />
+        <!-- Button triggers new movie to be added -->
+        <input id="add-movie" type="submit" value="Add a tag, Yo!" />
       </form>
 
       <div id="gifs-appear-here"></div>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script type="text/javascript">
-        // Initial array of tags
+        // Initial array of movies
 
-        var tags = [
+        var movies = [
           "cats",
           "dogs",
           "flowers",
@@ -44,8 +44,8 @@
           "money"
         ];
 
-        // Generic function for capturing the tag name from the data-attribute
-        function alertTagName() {
+        // Generic function for capturing the movie name from the data-attribute
+        function alertMovieName() {
           // YOUR CODE GOES HERE!!!
           var data = $(this).attr("data-name");
           var queryURL =
@@ -69,98 +69,76 @@
             for (var i = 0; i < results.length; i++) {
               // Step 3: uncomment the for loop above and the closing curly bracket below.
               // ============= put step 3 in between these dashes ======================
-              // Make a div with jQuery and store it in a variable named tagDiv.
-              tagDiv = $("<div>");
+              // Make a div with jQuery and store it in a variable named animalDiv.
+              animalDiv = $("<div>");
               // Make a paragraph tag with jQuery and store it in a variable named p.
               p = $("<p>");
               // Set the inner text of the paragraph to the rating of the image in results[i].
               var rating = results[i].rating;
               p.text("Rating: " + rating);
-              // Make an image tag with jQuery and store it in a variable named tagImage.
-              tagImage = $("<img>");
+              // Make an image tag with jQuery and store it in a variable named animalImage.
+              animalImage = $("<img>");
               // Set the image's src to results[i]'s fixed_height.url.
-              tagImage.attr("src", results[i].images.fixed_height_still.url);
-              tagImage.attr("class", "clickImage");
-
-              // tagGIF = $("<img>");
-              // tagGIF.attr("src", results[i].images.fixed_height.url);
-              // tagGIF.attr("class", "clickImage");
-
-              // Append the p variable to the tagDiv variable.
-              tagDiv.append(p);
-              // Append the tagImage variable to the tagDiv variable.
-              tagDiv.append(tagImage);
-              // Prepend the tagDiv variable to the element with an id of gifs-appear-here.
-              $("#gifs-appear-here").prepend(tagDiv);
+              animalImage.attr("src", results[i].images.fixed_height.url);
+              // Append the p variable to the animalDiv variable.
+              animalDiv.append(p);
+              // Append the animalImage variable to the animalDiv variable.
+              animalDiv.append(animalImage);
+              // Prepend the animalDiv variable to the element with an id of gifs-appear-here.
+              $("#gifs-appear-here").prepend(animalDiv);
               // ==================================
             }
           });
         }
 
-        // Function for displaying tag data
+        // Function for displaying movie data
         function renderButtons() {
-          // Deleting the tags prior to adding new tags
+          // Deleting the movies prior to adding new movies
           // (this is necessary otherwise we will have repeat buttons)
           $("#buttons-view").empty();
 
-          // Looping through the array of tags
-          for (var i = 0; i < tags.length; i++) {
-            // Then dynamicaly generating buttons for each tag in the array
+          // Looping through the array of movies
+          for (var i = 0; i < movies.length; i++) {
+            // Then dynamicaly generating buttons for each movie in the array
             // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
             var a = $("<button>");
             // Adding a class
-            a.addClass("tag");
+            a.addClass("movie");
             // Added a data-attribute
-            a.attr("data-name", tags[i]);
+            a.attr("data-name", movies[i]);
             // Provided the initial button text
-            a.text(tags[i]);
+            a.text(movies[i]);
             // Added the button to the HTML
             $("#buttons-view").append(a);
           }
         }
 
         // This function handles events where one button is clicked
-        $("#add-tag").on("click", function(event) {
+        $("#add-movie").on("click", function(event) {
           event.preventDefault();
 
           // This line grabs the input from the textbox
-          var tag = $("#tag-input")
+          var movie = $("#movie-input")
             .val()
             .trim();
 
-          // The tag from the textbox is then added to our array
-          tags.push(tag);
+          // The movie from the textbox is then added to our array
+          movies.push(movie);
 
-          // Calling renderButtons which handles the processing of our tag array
+          // Calling renderButtons which handles the processing of our movie array
           renderButtons();
         });
 
-        // Function for displaying the tag info
+        // Function for displaying the movie info
 
-        // We're adding a click event listener to all elements with the class "tag"
+        // We're adding a click event listener to all elements with the class "movie"
         // We're adding the event listener to the document itself because it will
         // work for dynamically generated elements
-        // $(".tags").on("click") will only add listeners to elements that are on the page at that time
-        $(document).on("click", ".tag", alertTagName);
+        // $(".movies").on("click") will only add listeners to elements that are on the page at that time
+        $(document).on("click", ".movie", alertMovieName);
 
         // Calling the renderButtons function to display the intial buttons
         renderButtons();
-        // Create a on click function which replaces the current static image with a live image by changing the url in the src attribute:
-        $(function() {
-          $(".clickImage").each(function(switchImage) {
-            var src = $(switchImage).attr("src");
-
-            $(switchImage).on(
-              "click",
-              function(event) {
-                $(this).attr("src", src.replace("_s.gif", ".gif"));
-              },
-              function() {
-                $(this).attr("src", src);
-              }
-            );
-          });
-        });
       </script>
     </div>
   </body>
